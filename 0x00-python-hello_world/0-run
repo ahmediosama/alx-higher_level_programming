@@ -1,3 +1,21 @@
 #!/bin/bash
 
-python3 $PYFILE
+# Check if at least one argument (Python file) is provided
+if [ "$#" -lt 1 ]; then
+    echo "Usage: $0 <python_file> [arguments]"
+    exit 1
+fi
+
+# Get the Python file from the first argument
+python_file="$1"
+shift # Remove the first argument (the Python file) from the list
+
+# Check if the Python file exists
+if [ ! -f "$python_file" ]; then
+    echo "Error: File '$python_file' not found."
+    exit 1
+fi
+
+# Run the Python file with any remaining arguments
+python3 "$python_file" "$@"
+
